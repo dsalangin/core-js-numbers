@@ -105,9 +105,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,-1) (1,0)    => π/2
  *   (0,1) (0,1)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  // return Math.atan2(y2 - y1, x2 - x1);
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  return Math.abs(Math.atan2(y2, x2) - Math.atan2(y1, x1));
 }
 
 /**
@@ -197,14 +196,13 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  // for (let i = 3; i <= n; i + 1) {
-  //   if (n % i === 0) {
-  //     return false;
-  //   }
-  // }
-  // return true;
-  throw new Error('Not implemented');
+function isPrime(n) {
+  for (let i = 2; i < n; i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -254,8 +252,20 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (!index) return 0;
+  const numbers = {
+    firstPrev: 0,
+    secondPrev: 0,
+    value: 1,
+  };
+
+  for (let i = 2; i <= index; i += 1) {
+    numbers.firstPrev = numbers.secondPrev;
+    numbers.secondPrev = numbers.value;
+    numbers.value = numbers.firstPrev + numbers.secondPrev;
+  }
+  return numbers.value;
 }
 
 /**
